@@ -1,11 +1,14 @@
 require("dotenv").config();
 const path = require("path");
+const fs = require("fs");
+const crypto = require("crypto");
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const PHOTO_KEY = process.env.PHOTO_KEY || null;
 
 app.use(cors());
 app.use(express.json({ limit: "100kb" }));
@@ -116,6 +119,32 @@ function escapeHtml(v) {
 }
 
 app.get("/api/health", (_req, res) => res.json({ ok: true }));
+
+/* ===== Serve the encrypted photo (raw image is never in the repo) ===== */
+app.get("/assets/alinshan.jpg", (req, res) => {
+  const encPath = path.join(__dirname, "..", "assets", "photo.enc");
+  if (!PHOTO_KEY) {
+    const plain = path.join(__dirname, "..", "assets", "alinshan.jpg");
+    if (fs.existsSync(plain)) return res.sendFile(plain);
+    return res.status(404).json({ ok: false, error: "PHOTO_KEY not set and no local image." });
+  }
+  try {
+    const data = fs.readFileSync(encPath);
+    const key = Buffer.from(PHOTO_KEY, "hex");
+    if (key.length !== 32) throw new Error("PHOTO_KEY must be 32 bytes (64 hex chars)");
+    const iv = data.slice(0, 12);
+    const tag = data.slice(12, 28);
+    const enc = data.slice(28);
+    const decipher = crypto.createDecipheriv("aes-256-gcm", key, iv);
+    decipher.setAuthTag(tag);
+    const plain = Buffer.concat([decipher.update(enc), decipher.final()]);
+    res.type("jpeg");
+    return res.send(plain);
+  } catch (err) {
+    console.error("Photo decrypt failed:", err.message);
+    return res.status(500).json({ ok: false, error: "Photo unavailable." });
+  }
+});
 
 /* ===== Serve the static portfolio ===== */
 const STATIC_DIR = path.join(__dirname, "..");

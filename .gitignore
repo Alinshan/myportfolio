@@ -3,3 +3,4 @@ node_modules/
 *.log
 server/node_modules/
 server/.env
+assets/alinshan.jpg
