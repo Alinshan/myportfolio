@@ -1,6 +1,4 @@
 node_modules/
 .env
 *.log
-server/node_modules/
-server/.env
-assets/alinshan.jpg
+.vercel/

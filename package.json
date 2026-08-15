@@ -1,0 +1,12 @@
+{
+  "name": "alinshan-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ALINSHAN A R portfolio — static site with Vercel serverless API",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "nodemailer": "^9.0.5"
+  }
+}

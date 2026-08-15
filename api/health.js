@@ -1,0 +1,3 @@
+module.exports = async function handler(_req, res) {
+  return res.json({ ok: true });
+};
