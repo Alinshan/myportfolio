@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>ALINSHAN A R — Pentester · Full Stack Developer</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9654;</text></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,7 +23,7 @@
   --dim:#7d8a96;
   --bar:6vh;
 }
-*{margin:0;padding:0;box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
 body{
   background:var(--bg);
@@ -127,13 +127,13 @@ nav.scrolled{background:rgba(4,6,9,.82);backdrop-filter:blur(14px);padding-top:1
 .sound-btn:hover{color:var(--neon);border-color:var(--neon);box-shadow:0 0 12px rgba(0,255,156,.25)}
 .hamburger{display:none;background:none;border:1px solid var(--line);color:var(--neon);font-size:18px;padding:4px 10px;border-radius:4px;font-family:inherit}
 @media(max-width:820px){
-  .nav-links{position:fixed;top:0;right:-100%;width:min(320px,78vw);height:100vh;flex-direction:column;justify-content:center;gap:26px;background:rgba(5,7,10,.96);border-left:1px solid var(--line);padding:40px;transition:right .5s cubic-bezier(.77,0,.18,1);z-index:115}
+  .nav-links{position:fixed;top:0;right:-100%;width:min(320px,78vw);height:100vh;height:100dvh;flex-direction:column;justify-content:center;gap:26px;background:rgba(5,7,10,.96);border-left:1px solid var(--line);padding:40px;transition:right .5s cubic-bezier(.77,0,.18,1);z-index:115}
   .nav-links.open{right:0}
   .hamburger{display:block;z-index:116}
 }
 
 /* ===== SECTIONS ===== */
-section{position:relative;padding:120px clamp(20px,5vw,80px);min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+section{position:relative;padding:120px clamp(20px,5vw,80px);min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;scroll-margin-top:70px}
 .scene-tag{
   font-size:11px;letter-spacing:4px;color:var(--dim);margin-bottom:14px;display:flex;align-items:center;gap:14px;
 }
@@ -156,7 +156,7 @@ h2.section-title .ghost{color:transparent;-webkit-text-stroke:1px rgba(255,255,2
 .reveal[data-delay="5"]{transition-delay:.6s}
 
 /* ===== HERO ===== */
-#hero{min-height:100vh;justify-content:center;overflow:hidden}
+#hero{min-height:100vh;min-height:100svh;justify-content:center;overflow:hidden}
 #matrix{position:absolute;inset:0;opacity:.22;z-index:0}
 .hero-inner{position:relative;z-index:2;max-width:1100px;display:grid;grid-template-columns:1fr minmax(250px,320px);gap:0 48px;align-items:center}
 .hero-copy{grid-column:1}
@@ -368,15 +368,71 @@ footer .love{color:var(--red);text-shadow:0 0 8px var(--red)}
 @media(max-width:900px){
   .hero-inner{grid-template-columns:1fr;gap:36px 0}
   .hero-copy{grid-column:1;grid-row:2}
-  .hero-photo{grid-column:1;grid-row:1;max-width:280px;margin:0 auto}
+  .hero-photo{grid-column:1;grid-row:1;max-width:min(74vw,320px);margin:0 auto}
   .hero-term{grid-column:1;grid-row:3}
+}
+
+/* ===== MOBILE / RESPONSIVE ===== */
+@media(max-width:900px){
+  .boot .ln{white-space:normal;overflow:visible;word-break:break-word}
+  .hero-term{max-width:100%}
+}
+@media(max-width:640px){
+  section{padding:84px 18px}
+  #hero{min-height:100svh}
+  .hero-eyebrow{letter-spacing:3px;font-size:11px}
+  .hero-role{letter-spacing:2px;font-size:12.5px;line-height:1.7}
+  .hero-desc{font-size:13.5px;line-height:1.75}
+  .hero-cta{gap:12px}
+  .hero-cta .btn{flex:1 1 100%;text-align:center;padding:15px 18px;font-size:12px}
+  .photo-frame,.photo-caption{max-width:min(80vw,300px);margin:0 auto}
+  .term-head{padding:8px 12px}
+  .term-title{font-size:10px}
+  .term-body{min-height:170px;font-size:12.5px}
+  .stat{padding:18px 14px}
+  .stat .num{font-size:28px}
+  .section-sub{margin-bottom:30px;font-size:13.5px}
+  .about-card,.skill-panel,.project{padding:22px 18px}
+  .tl-item{padding-left:20px}
+  .tf-body{padding:18px 14px}
+  .tf-body input,.tf-body textarea{font-size:16px}
+  .boot-title{font-size:clamp(18px,6vw,32px);letter-spacing:4px}
+  .scroll-hint{font-size:10px}
+  .timecode{font-size:10px}
+  .rec{font-size:10px}
+  .grain{animation:none}
+}
+@media(max-width:380px){
+  .logo{font-size:13px;letter-spacing:1px}
+  .sound-btn{font-size:11px;padding:5px 8px}
+  .glitch{font-size:clamp(24px,7.5vw,34px);letter-spacing:0}
+  .nav-links{padding:40px 26px;gap:22px}
+  .scene-tag{letter-spacing:3px;font-size:10px}
+  .contact-line{padding:14px}
+  .contact-line .ic{width:36px;height:36px;font-size:15px}
+}
+/* iPhone notch / rounded-corner safe areas */
+@media(max-width:900px){
+  @supports(padding:max(0px)){
+    nav{padding-left:max(clamp(20px,5vw,60px),env(safe-area-inset-left));padding-right:max(clamp(20px,5vw,60px),env(safe-area-inset-right))}
+    .nav-links{padding-top:max(40px,env(safe-area-inset-top));padding-bottom:max(40px,env(safe-area-inset-bottom))}
+    .timecode{right:max(26px,env(safe-area-inset-right));bottom:calc(var(--bar) + max(12px,env(safe-area-inset-bottom)))}
+    .rec{left:max(26px,env(safe-area-inset-left));bottom:calc(var(--bar) + max(12px,env(safe-area-inset-bottom)))}
+    footer{padding-bottom:calc(var(--bar) + max(40px,env(safe-area-inset-bottom)))}
+    .scroll-hint{bottom:calc(var(--bar) + max(26px,env(safe-area-inset-bottom)))}
+  }
+}
+/* short landscape phones */
+@media(orientation:landscape) and (max-height:520px){
+  #hero{min-height:auto;padding-top:96px}
+  .scroll-hint,.timecode,.rec{display:none}
 }
 </style>
 </head>
 <body class="custom">
 
 <div class="preloader" id="preloader">
-  <div class="boot-title">ALINSHAN<span class="hl">://</span>PORTFOLIO</div>
+  <div class="boot-title">ALINSHAN<span class="hl">://</span><wbr>PORTFOLIO</div>
   <div class="boot" id="boot"></div>
   <div class="spinner"></div>
 </div>
